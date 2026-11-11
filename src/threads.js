@@ -65,7 +65,7 @@ StagePickerMorph, CustomBlockDefinition, CommentMorph, BooleanSlotMorph, Color,
 CustomHatBlockMorph, SymbolMorph, MenuMorph, MorphicPreferences,
 SpeechBubbleMorph*/
 
-/*jshint esversion: 11, bitwise: false, evil: true EVIL JSHINT?!?!*/
+/*jshint esversion: 11, bitwise: false, evil: true*/
 
 modules.threads = '2026-November-11';
 
