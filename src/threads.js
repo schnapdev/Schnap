@@ -2495,7 +2495,7 @@ Process.prototype.reportNewList = function (elements) {
 };
 
 Process.prototype.reportArray = function (list) {
-    return list.toArray();
+    return list.asArray();
 };
 
 Process.prototype.reportCONS = function (car, cdr) {
