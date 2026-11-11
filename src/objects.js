@@ -739,15 +739,6 @@ SpriteMorph.prototype.primitiveBlocks = function () {
             code: 'back'
         },
 
-		getLayer: {
-            only: SpriteMorph,
-            type: 'reporter',
-            reports: 'number',
-            category: 'looks',
-            spec: 'layer',
-            code: 'spriteLayer'
-        },
-
         // Looks - Debugging primitives for development mode
         doScreenshot: {
             dev: true,
@@ -3974,8 +3965,6 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push('-');
         blocks.push(block('goToLayer'));
         blocks.push(block('goBack'));
-		blocks.push(watcherToggle('getLayer'));
-		blocks.push(block('getLayer', this.inheritsAttribute('layer')));
 
         // for debugging: ///////////////
         if (devMode) {
