@@ -172,7 +172,7 @@ SpriteMorph.prototype.blockColor = {
     operators : new Color(98, 194, 19),
     variables : new Color(243, 118, 29),
     lists : new Color(217, 77, 17),
-    other: new Color(150, 150, 150)
+    other: new Color(44, 44, 44)
 };
 
 SpriteMorph.prototype.customCategories = new Map(); // key: name, value: color
