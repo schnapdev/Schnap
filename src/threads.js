@@ -2494,6 +2494,10 @@ Process.prototype.reportNewList = function (elements) {
     return elements;
 };
 
+Process.prototype.reportArray = function (list) {
+    return list.toArray();
+};
+
 Process.prototype.reportCONS = function (car, cdr) {
     this.assertType(cdr, 'list');
     return new List().cons(car, cdr);
