@@ -1971,7 +1971,7 @@ SpriteMorph.prototype.primitiveBlocks = function () {
             code: 'de-boolean',
             src: `(
                 (prim t reportDeboolean arg)
-                (report ((get arg) + (0)))`
+                (report (+ (get arg) 0))`
         },
         reportJoinWords: {
             type: 'reporter',
