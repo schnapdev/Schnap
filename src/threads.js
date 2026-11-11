@@ -8456,6 +8456,10 @@ Process.prototype.reportNewCostumeSkewed = function (name, angle, factor) {
     return cst.skewed(+angle, +factor);
 };
 
+Process.prototype.reportSpriteCostume = function (name) {
+    return this.reportNewCostumeStretched(name, 100, 100)
+};
+
 Process.prototype.costumeNamed = function (name) {
     // private
     if (name instanceof Costume) {
