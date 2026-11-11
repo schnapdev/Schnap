@@ -4322,6 +4322,10 @@ Process.prototype.doThinkFor = function (data, secs) {
     this.pushContext();
 };
 
+Process.prototype.doRemoveBubble = function () {
+    this.blockReceiver().bubble("");
+};
+
 Process.prototype.dynamicViewFor = function (data) {
     // private - compute the dynamic view for an ADT
     this.context.inputs = [];
