@@ -2022,6 +2022,13 @@ SpriteMorph.prototype.primitiveBlocks = function () {
             spec: 'is %all== ?',
             code: 'same'
         },
+		reportIsValid: {
+            type: 'predicate',
+            category: 'operators',
+            spec: 'is %s valid?',
+            defaults: [5],
+            code: 'isValid'
+        },
         reportTextSplit: {
             type: 'reporter',
             reports: 'list',
