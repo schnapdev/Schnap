@@ -200,6 +200,20 @@
     }
   },
   {
+    "fileName": "Better blocks.xml",
+    "name": "Better blocks",
+    "description": "Random blocks to make use of Schnap! better",
+    "searchData": [
+      "let _ _",
+	  "let _ _ reporting themselves",
+	  "insert into _ _"
+    ],
+    "categories": [
+      "Other",
+	  "Control"
+    ]
+  },
+  {
     "fileName": "shapes_module.xml",
     "name": "Shapes",
     "description": "Create, combine, transform and display geometric shapes for a functions-first approach to teaching programming. Inspired by Pyret's image library, see: https://pyret.org/docs/horizon/image.html - under development",
