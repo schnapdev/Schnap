@@ -5672,6 +5672,10 @@ Process.prototype.reportBoolean = function (bool) {
     return bool;
 };
 
+Process.prototype.reportDeboolean = function (bool) {
+    return bool + 0;
+};
+
 // Process monadic primitives
 
 Process.prototype.reportRound = function (n) {
