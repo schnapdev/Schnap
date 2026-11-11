@@ -12191,6 +12191,7 @@ StageMorph.prototype.blockTemplates = function (
             blocks.push(this.devModeText());
             blocks.push('-');
             blocks.push(block('doShowTable'));
+			blocks.push(block('reportArray'));
         }
     }
 
