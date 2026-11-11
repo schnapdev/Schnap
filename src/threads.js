@@ -1633,6 +1633,10 @@ Process.prototype.reifyPredicate = function (topBlock, parameterNames) {
     return this.reify(topBlock, parameterNames);
 };
 
+Process.prototype.reifyAny = function (any) {
+    return any;
+};
+
 Process.prototype.reportJSFunction = function (parmNames, body) {
     if (!this.enableJS) {
         throw new Error('JavaScript extensions for Snap!\nare turned off');
