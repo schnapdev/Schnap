@@ -5088,6 +5088,10 @@ Process.prototype.reportIsA = function (thing, typeString) {
     }
 };
 
+Process.prototype.reportIsValid = function (thing) {
+    return (this.reportIsA(thing, "undefined") != true);
+};
+
 Process.prototype.assertType = function (thing, typeString, ...exempt) {
     // make sure "thing" is a particular type or any of a number of types
     // or a particular exempt value and raise an error if not
