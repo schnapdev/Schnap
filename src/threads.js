@@ -6539,7 +6539,7 @@ Process.prototype.goToLayer = function (name) {
 };
 
 Process.prototype.getLayer = function () {
-    return this.reportListIndex(this.reportGet("self"), this.reportAskFor(this.reportGet("stage"), this.reportGet("other sprites")));
+    return this.reportListIndex(this.reportGet("self"), this.reportAskFor("stage", this.reportGet("other sprites")));
 };
 
 // Process scene primitives
