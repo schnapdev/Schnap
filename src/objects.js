@@ -1788,6 +1788,13 @@ SpriteMorph.prototype.primitiveBlocks = function () {
             alias: 'predicate ring lambda',
             code: 'pred'
         },
+		reifyAny: {
+            type: 'reporter',
+            category: 'other',
+            spec: 'ringify %anyUE %ringparms',
+            alias: 'any ring lambda',
+            code: 'ringify'
+        },
         reportVariadicSum: {
             type: 'reporter',
             reports: 'number',
@@ -4248,6 +4255,7 @@ SpriteMorph.prototype.blockTemplates = function (
             blocks.push('-');
             blocks.push(block('reportTypeOf'));
             blocks.push(block('reportTextFunction'));
+			blocks.push(block('reifyAny'));
         }
 
     } else if (category === 'variables') {
@@ -12106,6 +12114,7 @@ StageMorph.prototype.blockTemplates = function (
             blocks.push('-');
             blocks.push(block('reportTypeOf'));
             blocks.push(block('reportTextFunction'));
+			blocks.push(block('reifyAny'));
         }
 
     }
