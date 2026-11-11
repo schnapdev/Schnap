@@ -2122,6 +2122,13 @@ SpriteMorph.prototype.primitiveBlocks = function () {
                 (prim t reportNewList inputs)
                 (report (get inputs)))`
         },
+		reportArray: {
+			dev: true,
+            type: 'reporter',
+            category: 'lists',
+            spec: '%l as an Array object',
+            code: 'array',
+        },
         reportCONS: {
             type: 'reporter',
             reports: 'list',
@@ -4333,6 +4340,7 @@ SpriteMorph.prototype.blockTemplates = function (
             blocks.push(this.devModeText());
             blocks.push('-');
             blocks.push(block('doShowTable'));
+			blocks.push(block('reportArray'));
         }
     }
 
