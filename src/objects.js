@@ -630,7 +630,6 @@ SpriteMorph.prototype.primitiveBlocks = function () {
             code: 'think'
         },
 		doRemoveBubble: {
-            only: SpriteMorph,
             type: 'command',
             category: 'looks',
             spec: 'remove bubble',
@@ -738,6 +737,15 @@ SpriteMorph.prototype.primitiveBlocks = function () {
             defaults: [1],
             animation: true,
             code: 'back'
+        },
+
+		getLayer: {
+            only: SpriteMorph,
+            type: 'reporter',
+            reports: 'number',
+            category: 'looks',
+            spec: 'layer',
+            code: 'spriteLayer'
         },
 
         // Looks - Debugging primitives for development mode
@@ -3966,6 +3974,8 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push('-');
         blocks.push(block('goToLayer'));
         blocks.push(block('goBack'));
+		blocks.push(watcherToggle('getLayer'));
+		blocks.push(block('getLayer', this.inheritsAttribute('layer')));
 
         // for debugging: ///////////////
         if (devMode) {
@@ -9753,7 +9763,8 @@ SpriteMorph.prototype.updatePropagationCache = function () {
             'volume',
             'balance',
             'shown?',
-            'pen down?'
+            'pen down?',
+			'layer'
         ],
         att => contains(this.inheritedAttributes, att)
     );
