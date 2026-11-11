@@ -573,6 +573,14 @@ SpriteMorph.prototype.primitiveBlocks = function () {
             defaults: [['current'], 100, 50],
             code: 'stretch'
         },
+		reportSpriteCostume: {
+            type: 'reporter',
+            reports: 'costume',
+            category: 'looks',
+            spec: 'costume %cst',
+            defaults: [['current']],
+            code: 'spriteCostume'
+        },
         reportNewCostumeSkewed: {
             type: 'reporter',
             reports: 'costume',
@@ -3939,6 +3947,7 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push(block('reportNewCostumeStretched'));
         blocks.push(block('reportNewCostumeSkewed'));
         blocks.push(block('reportNewCostume'));
+		blocks.push(block('reportSpriteCostume'));
         blocks.push('-');
         blocks.push(block('changeEffect'));
         blocks.push(block('setEffect'));
@@ -11818,6 +11827,7 @@ StageMorph.prototype.blockTemplates = function (
         blocks.push(block('reportNewCostumeStretched'));
         blocks.push(block('reportNewCostumeSkewed'));
         blocks.push(block('reportNewCostume'));
+		blocks.push(block('reportSpriteCostume'));
         blocks.push('-');
         blocks.push(block('changeEffect'));
         blocks.push(block('setEffect'));
