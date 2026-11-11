@@ -621,6 +621,13 @@ SpriteMorph.prototype.primitiveBlocks = function () {
             defaults: [localize('Hmm...')],
             code: 'think'
         },
+		doRemoveBubble: {
+            only: SpriteMorph,
+            type: 'command',
+            category: 'looks',
+            spec: 'remove bubble',
+            code: 'removeBubble'
+        },
         changeEffect: {
             type: 'command',
             category: 'looks',
@@ -3926,6 +3933,7 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push(block('bubble'));
         blocks.push(block('doThinkFor'));
         blocks.push(block('doThink'));
+		blocks.push(block('doRemoveBubble'));
         blocks.push('-');
         blocks.push(block('reportGetImageAttribute'));
         blocks.push(block('reportNewCostumeStretched'));
@@ -11804,6 +11812,7 @@ StageMorph.prototype.blockTemplates = function (
         blocks.push('-');
         blocks.push(block('doSayFor'));
         blocks.push(block('bubble'));
+		blocks.push(block('doRemoveBubble'));
         blocks.push('-');
         blocks.push(block('reportGetImageAttribute'));
         blocks.push(block('reportNewCostumeStretched'));
