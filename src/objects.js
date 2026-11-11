@@ -4224,6 +4224,7 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push(block('reportUnicodeAsLetter'));
         blocks.push('-');
         blocks.push(block('reportIsA'));
+		blocks.push(block('reportIsValid'));
         blocks.push(block('reportVariadicIsIdentical'));
 
         if (Process.prototype.enableJS) {
@@ -12079,6 +12080,7 @@ StageMorph.prototype.blockTemplates = function (
         blocks.push(block('reportUnicodeAsLetter'));
         blocks.push('-');
         blocks.push(block('reportIsA'));
+		blocks.push(block('reportIsValid'));
         blocks.push(block('reportVariadicIsIdentical'));
 
         if (Process.prototype.enableJS) { // (Process.prototype.enableJS) {
