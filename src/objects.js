@@ -1958,10 +1958,20 @@ SpriteMorph.prototype.primitiveBlocks = function () {
         },
         reportFalse: { // special case for keyboard entry and search
             type: 'predicate',
-            category: 'operators',
+            category: 'other',
             spec: '%bool',
             defaults: [false],
             alias: 'false boolean'
+        },
+		reportDeboolean: {
+            type: 'reporter',
+            category: 'operators',
+            spec: 'de-boolean %b',
+            alias: 'debooleanize',
+            code: 'de-boolean',
+            src: `(
+                (prim t reportDeboolean arg)
+                (report ((get arg) + (0)))`
         },
         reportJoinWords: {
             type: 'reporter',
@@ -4228,6 +4238,8 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push(block('reportVariadicOr'));
         blocks.push(block('reportNot'));
         blocks.push(block('reportBoolean'));
+		blocks.push('-');
+		blocks.push(block('reportDeboolean'));
         blocks.push('-');
         blocks.push(block('reportJoinWords'));
         blocks.push(block('reportTextSplit'));
@@ -12086,6 +12098,8 @@ StageMorph.prototype.blockTemplates = function (
         blocks.push(block('reportVariadicOr'));
         blocks.push(block('reportNot'));
         blocks.push(block('reportBoolean'));
+		blocks.push('-');
+		blocks.push(block('reportDeboolean'));
         blocks.push('-');
         blocks.push(block('reportJoinWords'));
         blocks.push(block('reportTextSplit'));
