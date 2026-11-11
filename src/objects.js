@@ -1958,14 +1958,14 @@ SpriteMorph.prototype.primitiveBlocks = function () {
         },
         reportFalse: { // special case for keyboard entry and search
             type: 'predicate',
-            category: 'other',
+            category: 'operators',
             spec: '%bool',
             defaults: [false],
             alias: 'false boolean'
         },
 		reportDeboolean: {
             type: 'reporter',
-            category: 'operators',
+            category: 'other',
             spec: 'de-boolean %b',
             alias: 'debooleanize',
             code: 'de-boolean',
