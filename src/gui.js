@@ -1094,13 +1094,19 @@ IDE_Morph.prototype.createLogo = function () {
     };
 
     this.logo.renderCachedTexture = function (ctx) {
-        ctx.drawImage(
-            this.cachedTexture,
-            5,
-            Math.round((this.height() - this.cachedTexture.height) / 2)
-        );
-        this.changed();
-    };
+    	var scale = (this.height() - 4) / this.cachedTexture.height, // -4 gives a tiny 2px top/bottom margin
+        	width = Math.round(this.cachedTexture.width * scale),
+        	height = Math.round(this.cachedTexture.height * scale);
+
+    	ctx.drawImage(
+        	this.cachedTexture,
+        	5,
+        	Math.round((this.height() - height) / 2),
+        	width,
+        	height
+    	);
+    	this.changed();
+	};
 
     this.logo.mouseClickLeft = function () {
         myself.snapMenu();
