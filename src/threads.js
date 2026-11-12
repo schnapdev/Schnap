@@ -5097,7 +5097,7 @@ Process.prototype.reportIsA = function (thing, typeString) {
 };
 
 Process.prototype.reportIsValid = function (thing) {
-    return (this.reportIsA(thing, "undefined") != true);
+    return (isNaN(thing) != true);
 };
 
 Process.prototype.assertType = function (thing, typeString, ...exempt) {
