@@ -95,6 +95,11 @@ function snapEquals(a, b) {
         return a === b;
     }
 
+	// dials
+	if (a.constructor.name === "DialMorph" && b.constructor.name === "DialMorph") {
+		return a.value === b.value
+	}
+
     // lists, functions and blocks
     if (a.equalTo || b.equalTo) {
         if (a.constructor.name === b.constructor.name) {
