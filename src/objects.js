@@ -2084,6 +2084,12 @@ SpriteMorph.prototype.primitiveBlocks = function () {
             spec: '%txtfun of %s',
             defaults: [['encode URI'], "Abelson & Sussman"]
         },
+		reportNil: { // only in dev mode for debugging
+            dev: true,
+            type: 'reporter',
+            category: 'operators',
+            spec: 'nil',
+        },
         reportCompiled: { // experimental
             dev: true,
             type: 'reporter',
