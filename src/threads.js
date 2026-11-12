@@ -5222,6 +5222,12 @@ Process.prototype.reportJsTypeOf = function (thing) {
 		if (value === null) {
 			return 'Nothing';
 		}
+		if (Boolean(value) === value) {
+			return 'Boolean';
+		}
+		if (value === "") {
+			return 'String';
+		}
 		if (!isNaN(Number(value))) {
 			return 'Number';
 		}
