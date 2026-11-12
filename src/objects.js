@@ -4222,6 +4222,7 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push(block('reifyReporter'));
         blocks.push(block('reifyPredicate'));
         blocks.push('#');
+		blocks.push(block('reifyAny'));
         blocks.push('-');
         blocks.push(block('reportVariadicSum'));
         blocks.push(block('reportDifference'));
@@ -4275,7 +4276,6 @@ SpriteMorph.prototype.blockTemplates = function (
             blocks.push('-');
             blocks.push(block('reportTypeOf'));
             blocks.push(block('reportTextFunction'));
-			blocks.push(block('reifyAny'));
         }
 
     } else if (category === 'variables') {
@@ -12073,6 +12073,7 @@ StageMorph.prototype.blockTemplates = function (
         blocks.push(block('reifyReporter'));
         blocks.push(block('reifyPredicate'));
         blocks.push('#');
+		blocks.push(block('reifyAny'));
         blocks.push('-');
         blocks.push(block('reportVariadicSum'));
         blocks.push(block('reportDifference'));
@@ -12127,7 +12128,6 @@ StageMorph.prototype.blockTemplates = function (
             blocks.push('-');
             blocks.push(block('reportTypeOf'));
             blocks.push(block('reportTextFunction'));
-			blocks.push(block('reifyAny'));
         }
 
     }
