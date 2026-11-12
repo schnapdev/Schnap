@@ -6544,6 +6544,10 @@ Process.prototype.reportDial = function (direction) {
 	return new DialMorph(null, null, dialDir)
 }
 
+Process.prototype.reportDialAsNumber = function (dial) {
+	return dial.value
+}
+
 Process.prototype.doGotoObject = function (name) {
     var thisObj = this.blockReceiver(),
         thatObj,
