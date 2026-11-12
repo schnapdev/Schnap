@@ -6504,11 +6504,7 @@ Process.prototype.doFaceTowards = function (name) {
 };
 
 Process.prototype.reportDial = function (direction) {
-	if (direction < 0) {
-		dialDir = direction * -1 + 180
-	} else {
-		dialDir = direction
-	}
+	dialDir = this.reportModulus(direction, 360)
 	return new DialMorph(null, null, dialDir)
 }
 
