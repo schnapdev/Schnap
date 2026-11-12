@@ -5219,13 +5219,13 @@ Process.prototype.reportTypeOf = function (thing) {
 
 Process.prototype.reportJsTypeOf = function (thing) {
 	function jsTypeOf(value) {
-		if (!isNaN(Number(thing))) {
-			return 'Number';
-		}
-		if (thing === null) {
+		if (value === null) {
 			return 'Nothing';
 		}
-		if (thing === undefined) {
+		if (!isNaN(Number(value))) {
+			return 'Number';
+		}
+		if (value === undefined) {
 			return 'Undefined';
 		}
   		return value.constructor.name; 
