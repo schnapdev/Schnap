@@ -4282,6 +4282,7 @@ SpriteMorph.prototype.blockTemplates = function (
             blocks.push('-');
             blocks.push(block('reportTypeOf'));
             blocks.push(block('reportTextFunction'));
+			blocks.push(block('reportNil'));
         }
 
     } else if (category === 'variables') {
@@ -12134,6 +12135,7 @@ StageMorph.prototype.blockTemplates = function (
             blocks.push('-');
             blocks.push(block('reportTypeOf'));
             blocks.push(block('reportTextFunction'));
+			blocks.push(block('reportNil'));
         }
 
     }
