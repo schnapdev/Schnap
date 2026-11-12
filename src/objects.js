@@ -319,6 +319,12 @@ SpriteMorph.prototype.primitiveBlocks = function () {
             defaults: [90],
             code: 'dial'
         },
+		reportDialAsNumber: {
+            type: 'reporter',
+            category: 'motion',
+            spec: '$gearsAnimated dial %s to number',
+            code: 'dialNumeric'
+        },
         gotoXY: {
             only: SpriteMorph,
             type: 'command',
