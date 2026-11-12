@@ -5482,6 +5482,12 @@ Process.prototype.reportBasicMax = function (a, b) {
     return x > y ? x : y;
 };
 
+// Process dev primitives - miscellaneous, added by Schnap!
+
+Process.prototype.reportNil = function () {
+	return null;
+}
+
 // Process logic primitives - hyper-variadic applicative order
 
 Process.prototype.reportVariadicLessThan = function (items) {
