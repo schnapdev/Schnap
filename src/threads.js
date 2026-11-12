@@ -5219,7 +5219,7 @@ Process.prototype.reportTypeOf = function (thing) {
 
 Process.prototype.reportJsTypeOf = function (thing) {
 	function jsTypeOf(value) {
-  		return Object.prototype.toString.call(value).slice(8, -1).toLowerCase();
+  		return value.constructor.name; 
 	}
     return jsTypeOf(thing)
 };
