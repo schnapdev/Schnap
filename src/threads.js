@@ -5217,6 +5217,13 @@ Process.prototype.reportTypeOf = function (thing) {
     return 'undefined';
 };
 
+Process.prototype.reportJsTypeOf = function (thing) {
+	function jsTypeOf(value) {
+  		return Object.prototype.toString.call(value).slice(8, -1).toLowerCase();
+	}
+    return jsTypeOf(thing)
+};
+
 // Process math primtives - hyper
 
 Process.prototype.hyper = function (fn, ...args) {
