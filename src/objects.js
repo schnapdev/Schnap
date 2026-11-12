@@ -3968,6 +3968,7 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push(block('setHeading'));
         blocks.push(block('doFaceTowards'));
 		blocks.push(block('reportDial'));
+		blocks.push(block('reportDialAsNumber'));
         blocks.push('-');
         blocks.push(block('gotoXY'));
         blocks.push(block('doGotoObject'));
@@ -11868,6 +11869,7 @@ StageMorph.prototype.blockTemplates = function (
     if (category === 'motion') {
 
         blocks.push(block('reportDial'));
+		blocks.push(block('reportDialAsNumber'));
 
     } else if (category === 'looks') {
 
