@@ -6503,6 +6503,10 @@ Process.prototype.doFaceTowards = function (name) {
     }
 };
 
+Process.prototype.reportDial = function (direction) {
+	return new DialMorph(null, null, direction)
+}
+
 Process.prototype.doGotoObject = function (name) {
     var thisObj = this.blockReceiver(),
         thatObj,
