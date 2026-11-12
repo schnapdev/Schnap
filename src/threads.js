@@ -5219,6 +5219,15 @@ Process.prototype.reportTypeOf = function (thing) {
 
 Process.prototype.reportJsTypeOf = function (thing) {
 	function jsTypeOf(value) {
+		if (!isNaN(Number(thing))) {
+			return 'Number';
+		}
+		if (thing === null) {
+			return 'Nothing';
+		}
+		if (thing === undefined) {
+			return 'Undefined';
+		}
   		return value.constructor.name; 
 	}
     return jsTypeOf(thing)
