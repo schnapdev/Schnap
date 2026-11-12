@@ -2076,6 +2076,14 @@ SpriteMorph.prototype.primitiveBlocks = function () {
             spec: 'type of %s',
             defaults: [5]
         },
+		reportJsTypeOf: { // only in dev mode for debugging
+            dev: true,
+            type: 'reporter',
+            reports: 'text',
+            category: 'other',
+            spec: 'type of %s',
+            defaults: [5]
+        },
         reportTextFunction: { // only in dev mode - experimental
             dev: true,
             type: 'reporter',
@@ -4281,6 +4289,7 @@ SpriteMorph.prototype.blockTemplates = function (
             blocks.push(this.devModeText());
             blocks.push('-');
             blocks.push(block('reportTypeOf'));
+			blocks.push(block('reportJsTypeOf'));
             blocks.push(block('reportTextFunction'));
 			blocks.push(block('reportNil'));
         }
@@ -12134,6 +12143,7 @@ StageMorph.prototype.blockTemplates = function (
             blocks.push(this.devModeText());
             blocks.push('-');
             blocks.push(block('reportTypeOf'));
+			blocks.push(block('reportJsTypeOf'));
             blocks.push(block('reportTextFunction'));
 			blocks.push(block('reportNil'));
         }
