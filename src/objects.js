@@ -312,6 +312,13 @@ SpriteMorph.prototype.primitiveBlocks = function () {
             animation: true,
             code: 'face'
         },
+		reportDial: {
+            type: 'reporter',
+            category: 'motion',
+            spec: 'direction %dir',
+            defaults: [90],
+            code: 'dial'
+        },
         gotoXY: {
             only: SpriteMorph,
             type: 'command',
@@ -3940,6 +3947,7 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push('-');
         blocks.push(block('setHeading'));
         blocks.push(block('doFaceTowards'));
+		blocks.push(block('reportDial'));
         blocks.push('-');
         blocks.push(block('gotoXY'));
         blocks.push(block('doGotoObject'));
@@ -11835,20 +11843,11 @@ StageMorph.prototype.blockTemplates = function (
         }
     });
 
-/* // commented out to support sprite-less microworlds in v12
-
     if (category === 'motion') {
 
-        txt = new TextMorph(localize('Stage selected:\nno motion primitives'));
-        txt.fontSize = 9;
-        txt.setColor(this.paletteTextColor);
-        txt.hideWithCategory = true; // hide txt when category names are hidden
-        blocks.push(txt);
+        blocks.push(block('reportDial'));
 
-    } else
-*/
-
-    if (category === 'looks') {
+    } else if (category === 'looks') {
 
         blocks.push(block('doSwitchToCostume'));
         blocks.push(block('doWearNextCostume'));
