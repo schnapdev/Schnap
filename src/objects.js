@@ -315,7 +315,7 @@ SpriteMorph.prototype.primitiveBlocks = function () {
 		reportDial: {
             type: 'reporter',
             category: 'motion',
-            spec: 'direction %dir',
+            spec: '$gearsAnimated direction %dir',
             defaults: [90],
             code: 'dial'
         },
