@@ -1291,12 +1291,12 @@ SpriteMorph.prototype.primitiveBlocks = function () {
                     (run (get action))
                     (+= count (get increment)))))`
         },
-		doTryCatch: {
+		doError: {
             type: 'command',
             category: 'control',
-            spec: 'try %c catch %upvar %c',
-            defaults: [null, 'err'],
-            code: 'tryCatch',
+            spec: 'throw %s',
+            defaults: [localize('an error occurred')],
+            code: 'throw',
         },
         doIf: {
             type: 'command',
@@ -4151,7 +4151,7 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push(block('doRepeat'));
         blocks.push(block('doUntil'));
         blocks.push(block('doFor'));
-		blocks.push(block('doTryCatch'));
+		blocks.push(block('doError'));
         blocks.push('-');
         // blocks.push(block('doVariadicIf'));
         blocks.push(block('doIf'));
@@ -12012,7 +12012,7 @@ StageMorph.prototype.blockTemplates = function (
         blocks.push(block('doRepeat'));
         blocks.push(block('doUntil'));
         blocks.push(block('doFor'));
-		blocks.push(block('doTryCatch'));
+		blocks.push(block('doError'));
         blocks.push('-');
         // blocks.push(block('doVariadicIf'));
         blocks.push(block('doIf'));
