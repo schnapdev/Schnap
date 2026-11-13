@@ -1294,7 +1294,7 @@ SpriteMorph.prototype.primitiveBlocks = function () {
 		doTryCatch: {
             type: 'command',
             category: 'control',
-            spec: 'try %cla catch %upvar %cla',
+            spec: 'try %c catch %upvar %c',
             defaults: [null, 'err'],
             code: 'tryCatch',
         },
