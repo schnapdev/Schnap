@@ -1291,6 +1291,13 @@ SpriteMorph.prototype.primitiveBlocks = function () {
                     (run (get action))
                     (+= count (get increment)))))`
         },
+		doTryCatch: {
+            type: 'command',
+            category: 'control',
+            spec: 'try %cla catch %upvar %cla',
+            defaults: [null, 'err'],
+            code: 'tryCatch',
+        },
         doIf: {
             type: 'command',
             category: 'control',
