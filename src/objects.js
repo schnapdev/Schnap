@@ -3961,14 +3961,13 @@ SpriteMorph.prototype.blockTemplates = function (
 
     if (category === 'motion') {
 
+		blocks.push(new TextMorph(localize('Movement')));
         blocks.push(block('forward'));
         blocks.push(block('turn'));
         blocks.push(block('turnLeft'));
         blocks.push('-');
         blocks.push(block('setHeading'));
         blocks.push(block('doFaceTowards'));
-		blocks.push(block('reportDial'));
-		blocks.push(block('reportDialAsNumber'));
         blocks.push('-');
         blocks.push(block('gotoXY'));
         blocks.push(block('doGotoObject'));
@@ -3981,6 +3980,10 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push('-');
         blocks.push(block('bounceOffEdge'));
         blocks.push('-');
+		blocks.push(new TextMorph(localize('Dials')));
+		blocks.push(block('reportDial'));
+		blocks.push(block('reportDialAsNumber'));
+		blocks.push(new TextMorph(localize('Position and Direction')));
         blocks.push(block('getPosition'));
         blocks.push(watcherToggle('xPosition'));
         blocks.push(block('xPosition', this.inheritsAttribute('x position')));
