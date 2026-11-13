@@ -3960,8 +3960,20 @@ SpriteMorph.prototype.blockTemplates = function (
     });
 
     if (category === 'motion') {
+		movementtxt = new TextMorph(localize('Movement'));
+		movementtxt.fontSize = 9;
+        movementtxt.setColor(this.paletteTextColor);
+        movementtxt.hideWithCategory = true;
+		dialstxt = new TextMorph(localize('Dials'));
+		dialstxt.fontSize = 9;
+        dialstxt.setColor(this.paletteTextColor);
+        dialstxt.hideWithCategory = true;
+		posdirtxt = new TextMorph(localize('Position and Direction'))
+		posdirtxt.fontSize = 9;
+        posdirtxt.setColor(this.paletteTextColor);
+        posdirtxt.hideWithCategory = true;
 
-		blocks.push(new TextMorph(localize('Movement')));
+		blocks.push(movementtxt);
         blocks.push(block('forward'));
         blocks.push(block('turn'));
         blocks.push(block('turnLeft'));
@@ -3980,10 +3992,10 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push('-');
         blocks.push(block('bounceOffEdge'));
         blocks.push('-');
-		blocks.push(new TextMorph(localize('Dials')));
+		blocks.push(dialstxt);
 		blocks.push(block('reportDial'));
 		blocks.push(block('reportDialAsNumber'));
-		blocks.push(new TextMorph(localize('Position and Direction')));
+		blocks.push(posdirtxt);
         blocks.push(block('getPosition'));
         blocks.push(watcherToggle('xPosition'));
         blocks.push(block('xPosition', this.inheritsAttribute('x position')));
