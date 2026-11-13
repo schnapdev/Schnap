@@ -4151,6 +4151,7 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push(block('doRepeat'));
         blocks.push(block('doUntil'));
         blocks.push(block('doFor'));
+		blocks.push(block('doTryCatch'));
         blocks.push('-');
         // blocks.push(block('doVariadicIf'));
         blocks.push(block('doIf'));
@@ -12011,6 +12012,7 @@ StageMorph.prototype.blockTemplates = function (
         blocks.push(block('doRepeat'));
         blocks.push(block('doUntil'));
         blocks.push(block('doFor'));
+		blocks.push(block('doTryCatch'));
         blocks.push('-');
         // blocks.push(block('doVariadicIf'));
         blocks.push(block('doIf'));
