@@ -3771,13 +3771,8 @@ Process.prototype.doFor = function (upvar, start, end, script) {
     this.pushContext();
 };
 
-Process.prototype.doTryCatch = function (first, upvar, last) {
-	try {
-		this.doRun(first)
-	} catch (err) {
-		this.doSetVar(upvar, err)
-		this.doRun(last)
-	}
+Process.prototype.doError = function (error) {
+	throw new Error(error);
 }
 
 // Process interpolated HOF primitives
