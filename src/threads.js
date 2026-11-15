@@ -2517,6 +2517,11 @@ Process.prototype.reportCDR = function (list) {
     return list.cdr();
 };
 
+Process.prototype.reportLink = function (list) {
+    this.assertType(list, 'list');
+    return new List().cons(this.reportListItem(1, list), this.reportCDR(list));
+};
+
 Process.prototype.doAddToList = function (element, list) {
     this.assertType(list, 'list');
     if (list.type) {
@@ -5435,6 +5440,10 @@ Process.prototype.reportPower = function (a, b) {
     return this.hyper(this.reportBasicPower, a, b);
 };
 
+Process.prototype.reportRoot = function (a, b) {
+    return this.hyper(this.reportBasicPower, a, 1 / b);
+};
+
 Process.prototype.reportBasicPower = function (a, b) {
     return Math.pow(+a, +b);
 };
@@ -6550,6 +6559,10 @@ Process.prototype.reportDial = function (direction) {
 
 Process.prototype.reportDialAsNumber = function (dial) {
 	return dial.value
+}
+
+Process.prototype.reportAddToDial = function (value, dial) {
+	return this.reportDial(dial.value + value)
 }
 
 Process.prototype.doGotoObject = function (name) {
