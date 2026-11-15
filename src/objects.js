@@ -325,6 +325,12 @@ SpriteMorph.prototype.primitiveBlocks = function () {
             spec: '$gearsAnimated dial %s to number',
             code: 'dialNumeric'
         },
+		reportAddToDial: {
+            type: 'reporter',
+            category: 'motion',
+            spec: '$gearsAnimated add %n to dial %s',
+            code: 'dialAdd'
+        },
         gotoXY: {
             only: SpriteMorph,
             type: 'command',
@@ -1868,6 +1874,13 @@ SpriteMorph.prototype.primitiveBlocks = function () {
             spec: '%n ^ %n',
             code: '^'
         },
+		reportRoot: {
+			type: 'reporter',
+			reports: 'number',
+			category: 'operators',
+			spec: '%n √ %n',
+			code: 'root'
+		},
         reportModulus: {
             type: 'reporter',
             reports: 'number',
@@ -2201,6 +2214,13 @@ SpriteMorph.prototype.primitiveBlocks = function () {
             category: 'lists',
             spec: 'all but first of %l',
             code: 'cdr'
+        },
+		reportLink: {
+            type: 'reporter',
+            reports: 'list',
+            category: 'lists',
+            spec: 'link %l',
+            code: 'link'
         },
         reportListLength: { // deprecated as of v6.6
             dev: true,
@@ -3253,32 +3273,35 @@ SpriteMorph.prototype.blockAlternatives = {
 
     // operators:
     reportVariadicSum: ['reportDifference', 'reportVariadicProduct',
-        'reportQuotient', 'reportPower', 'reportModulus', 'reportAtan2',
+        'reportQuotient', 'reportPower', 'reportRoot', 'reportModulus', 'reportAtan2',
         'reportVariadicMin', 'reportVariadicMax'],
     reportDifference: ['reportVariadicSum', 'reportVariadicProduct',
-        'reportQuotient', 'reportPower', 'reportModulus', 'reportAtan2',
+        'reportQuotient', 'reportPower', 'reportRoot', 'reportModulus', 'reportAtan2',
         'reportVariadicMin', 'reportVariadicMax'],
     reportVariadicProduct: ['reportDifference', 'reportVariadicSum',
-        'reportQuotient', 'reportPower', 'reportModulus', 'reportAtan2',
+        'reportQuotient', 'reportPower', 'reportRoot', 'reportModulus', 'reportAtan2',
         'reportVariadicMin', 'reportVariadicMax'],
     reportQuotient: ['reportDifference', 'reportVariadicProduct',
-        'reportVariadicSum', 'reportPower', 'reportModulus', 'reportAtan2',
+        'reportVariadicSum', 'reportPower', 'reportRoot', 'reportModulus', 'reportAtan2',
         'reportVariadicMin', 'reportVariadicMax'],
     reportPower: ['reportDifference', 'reportVariadicProduct',
-        'reportVariadicSum', 'reportQuotient', 'reportModulus', 'reportAtan2',
+        'reportVariadicSum', 'reportQuotient', 'reportRoot', 'reportModulus', 'reportAtan2',
+        'reportVariadicMin', 'reportVariadicMax'],
+	reportRoot: ['reportDifference', 'reportVariadicProduct',
+        'reportVariadicSum', 'reportQuotient', 'reportPower', 'reportModulus', 'reportAtan2',
         'reportVariadicMin', 'reportVariadicMax'],
     reportModulus: ['reportAtan2', 'reportDifference', 'reportVariadicProduct',
         'reportVariadicSum','reportQuotient', 'reportPower',
-        'reportVariadicMin', 'reportVariadicMax'],
+        'reportRoot', 'reportVariadicMin', 'reportVariadicMax'],
     reportAtan2: ['reportModulus', 'reportDifference', 'reportVariadicProduct',
         'reportVariadicSum','reportQuotient', 'reportPower',
-        'reportVariadicMin', 'reportVariadicMax'],
+        'reportRoot', 'reportVariadicMin', 'reportVariadicMax'],
     reportVariadicMin: ['reportVariadicMax', 'reportVariadicSum',
         'reportDifference', 'reportVariadicProduct', 'reportQuotient',
-        'reportPower', 'reportModulus', 'reportAtan2'],
+        'reportRoot', 'reportPower', 'reportModulus', 'reportAtan2'],
     reportVariadicMax: ['reportVariadicMin', 'reportVariadicSum',
         'reportDifference', 'reportVariadicProduct', 'reportQuotient',
-        'reportPower', 'reportModulus', 'reportAtan2'],
+        'reportPower', 'reportRoot', 'reportModulus', 'reportAtan2'],
     reportVariadicLessThan: ['reportVariadicLessThanOrEquals',
         'reportVariadicEquals', 'reportVariadicIsIdentical',
         'reportVariadicNotEquals', 'reportVariadicGreaterThan',
@@ -4001,7 +4024,9 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push('-');
 		blocks.push(dialstxt);
 		blocks.push(block('reportDial'));
+		blocks.push('-');
 		blocks.push(block('reportDialAsNumber'));
+		blocks.push(block('reportAddToDial'));
 		blocks.push(posdirtxt);
         blocks.push(block('getPosition'));
         blocks.push(watcherToggle('xPosition'));
@@ -4273,6 +4298,7 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push(block('reportVariadicProduct'));
         blocks.push(block('reportQuotient'));
         blocks.push(block('reportPower'));
+		blocks.push(block('reportRoot'));
         blocks.push('-');
         blocks.push(block('reportModulus'));
         blocks.push(block('reportVariadicMin'));
@@ -4370,6 +4396,7 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push(block('reportCONS'));
         blocks.push(block('reportListItem'));
         blocks.push(block('reportCDR'));
+		blocks.push(block('reportLink'));
         blocks.push('-');
         blocks.push(block('reportListAttribute'));
         blocks.push(block('reportListIndex'));
