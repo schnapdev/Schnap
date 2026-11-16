@@ -2504,6 +2504,20 @@ SpriteMorph.prototype.primitiveBlocks = function () {
                         (report 0)))
                     (get data))))`
         },
+		doForIndex: {
+            type: 'command',
+            category: 'lists',
+            spec: 'for each %upvar in %l %cla',
+            defaults: [localize('#')],
+            code: 'forIndex',
+        },
+		doForList: {
+            type: 'command',
+            category: 'lists',
+            spec: 'for %upvar $arrowLeft %n to %n %l %cla',
+            defaults: [localize('item'), 1, 3],
+            code: 'forList'
+        },
 
         // Tables - experimental
         doShowTable: {
@@ -3251,13 +3265,13 @@ SpriteMorph.prototype.blockAlternatives = {
     doBroadcastAndWait: ['doBroadcast'],
     doIf: ['doIfElse', 'doUntil'],
     doIfElse: ['doIf', 'doUntil'],
-    doRepeat: ['doUntil', ['doForever', -1], ['doFor', 2], ['doForEach', 1]],
+    doRepeat: ['doUntil', ['doForever', -1], ['doFor', 2], ['doForEach', 1], ['doForIndex', 1], ['doForList', 3]],
     doUntil: ['doRepeat', 'doIf', ['doForever', -1], ['doFor', 2],
-        ['doForEach', 1]],
+        ['doForEach', 1], ['doForIndex', 1], ['doForList', 3]],
     doForever: [['doUntil', 1], ['doRepeat', 1], ['doFor', 3],
-        ['doForEach', 2]],
+        ['doForEach', 2], ['doForIndex', 2], ['doForList', 4]],
     doFor: [['doForever', -3], ['doRepeat', -2], ['doUntil', -2],
-        ['doForEach', -1]],
+        ['doForEach', -1], ['doForIndex', -1], ['doForList', 1]],
     receiveCondition: ['receiveConditionEvent'],
     receiveConditionEvent: ['receiveCondition'],
     // doRun: ['fork'],
@@ -3347,8 +3361,8 @@ SpriteMorph.prototype.blockAlternatives = {
     reportMap: ['reportKeep', 'reportFindFirst'],
     reportKeep: ['reportFindFirst', 'reportMap'],
     reportFindFirst: ['reportKeep', 'reportMap'],
-    doForEach: [['doFor', 1], ['doForever', -2], ['doRepeat', -1],
-        ['doUntil', -1]]
+    doForEach: ['doForIndex', ['doFor', 1], ['doForever', -2], ['doRepeat', -1],
+        ['doUntil', -1], ['doForList', 2]]
 };
 
 // SpriteMorph instance creation
@@ -4409,6 +4423,8 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push(block('reportCombine'));
         blocks.push('-');
         blocks.push(block('doForEach'));
+		blocks.push(block('doForIndex'));
+		blocks.push(block('doForList'));
         blocks.push('-');
         blocks.push(block('doAddToList'));
         blocks.push(block('doDeleteFromList'));
