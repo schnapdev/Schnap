@@ -3805,7 +3805,7 @@ Process.prototype.doForList = function (upvar, start, end, list, script) {
                 (() => +up > +end)
                 : (() => +up < +end),
             step : +start < +end ? 1 : -1,
-			reach: +up = +end ? 0 : step,
+			reach: +up = +end ? 0 : dta.step,
             parms : new List() // empty parameters, reusable to avoid GC
         };
 		up = Math.floor(+start)
