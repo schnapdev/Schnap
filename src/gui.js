@@ -91,7 +91,7 @@ modules.gui = '2026-November-06';
 
 // Declarations
 
-var SnapVersion = '1.1.1';
+var SnapVersion = '1.1.2';
 
 var IDE_Morph;
 var ProjectDialogMorph;
@@ -4505,13 +4505,13 @@ IDE_Morph.prototype.snapMenu = function () {
         }
     );
     menu.addItem(
-        'Snap! website',
-        () => window.open('https://snap.berkeley.edu/', 'SnapWebsite')
+        'Forum post about Schnap!',
+        () => window.open('https://forum.snap.berkeley.edu/t/schnap-random-snap-mod-i-made-cuz-i-was-bored/22785', 'SnapWebsite')
     );
     menu.addItem(
         'Download source',
         () => window.open(
-                'https://github.com/jmoenig/Snap/releases/latest',
+                'https://github.com/schnapdev/Schnap',
                 'SnapSource'
             )
     );
@@ -5820,7 +5820,8 @@ IDE_Morph.prototype.aboutSnap = function () {
         module, btn1, btn2, btn3, btn4, licenseBtn, translatorsBtn,
         world = this.world();
 
-    aboutTxt = 'Snap! ' + SnapVersion + '\nBuild Your Own Blocks\n\n'
+    aboutTxt = 'Schnap! ' + SnapVersion + '\nBuild Your Own Blocks\n\n'
+		+ 'Mod of Snap! by vblackmar\n'
         + 'Copyright \u24B8 2008-2026 Jens M\u00F6nig and '
         + 'Brian Harvey\n'
         + 'jens@moenig.org, bh@cs.berkeley.edu\n\n'
@@ -5942,7 +5943,7 @@ IDE_Morph.prototype.aboutSnap = function () {
         return tm;
     }
 
-    dlg.inform('About Snap', aboutTxt, world, this.logo.cachedTexture);
+    dlg.inform('About Schnap!', aboutTxt, world, this.logo.cachedTexture);
     btn1 = dlg.buttons.children[0];
     translatorsBtn = dlg.addButton(
         () => {
