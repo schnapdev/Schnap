@@ -3749,9 +3749,9 @@ Process.prototype.doForIndex = function (upvar, list, script) {
 	if (this.context.counter <= list.length()) {
 		this.context.outerContext.variables.addVar(upvar);
     	this.context.outerContext.variables.setVar(upvar, this.context.counter);
+		this.context.counter += 1;
     	this.pushContext('doYield');
     	this.pushContext(script);
-		this.context.counter += 1;
 	}
 };
 
@@ -3777,9 +3777,9 @@ Process.prototype.doForList = function (upvar, start, end, list, script) {
     if ((sg === 1 && this.context.counter <= nd) || (sg === -1 && this.context.counter >= nd)) {
         this.context.outerContext.variables.addVar(upvar);
         this.context.outerContext.variables.setVar(upvar, list.at(this.context.counter));
+		this.context.counter += sg;
         this.pushContext('doYield');
         this.pushContext(script);
-		this.context.counter += sg;
     }
 }
 
