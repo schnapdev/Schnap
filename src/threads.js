@@ -3739,48 +3739,13 @@ Process.prototype.doForEach = function (upvar, list, script) {
 
 Process.prototype.doForIndex = function (upvar, list, script) {
 	// for each index of a list
-    var next;
-	var indicator = 0;
-    if (this.context.accumulator === null) {
-        this.assertType(list, 'list');
-        this.context.accumulator = {
-            source : list,
-            remaining : list.length(),
-            idx : 0
-        };
-    }
-    if (this.context.accumulator.remaining === 0) {
-        return;
-    }
-    this.context.accumulator.remaining -= 1;
-	indicator += 1;
-    if (this.context.accumulator.source.isLinked) {
-        next = this.context.accumulator.source.at(1);
-        this.context.accumulator.source =
-            this.context.accumulator.source.cdr();
-    } else { // arrayed
-        this.context.accumulator.idx += 1;
-        next = this.context.accumulator.source.at(this.context.accumulator.idx);
-    }
-    this.pushContext('doYield');
-
-    // optimize running the body script for speed:
-    // don't reify the C-slot contents, see: isAutoLambda()
-    // and put the script directly on the stack.
-    // below is the alternative - more correct (scope) code,
-    // retained in case of issues with the optimized version
-    // -------------------
-    // this.pushContext();
-    // this.context.outerContext.variables.addVar(upvar);
-    // this.context.outerContext.variables.setVar(upvar, next);
-    // this.evaluate(script, new List(/*[next]*/), true);
-
-    if (script) {
-        this.pushContext(script.blockSequence());
-    }
-    this.context.outerContext.variables.addVar(upvar);
-    this.context.outerContext.variables.setVar(upvar, indicator);
-    this.pushContext();
+	this.context.outerContext.variables.addVar(upvar);
+    for (let i = 1; i <= list.length(); i++) {
+		this.context.outerContext.variables.setVar(upvar, i);
+		if (script) {
+        	this.pushContext(script.blockSequence());
+    	}
+	}
 };
 
 Process.prototype.doForList = function (upvar, start, end, list, script) {
@@ -3791,11 +3756,11 @@ Process.prototype.doForList = function (upvar, start, end, list, script) {
 		st = 1;
 	}
 	if (end == "") {
-		nd = this.reportListAttribute(localize('length'), list);
+		nd = list.length();
 	}
 	sg = this.reportMonadic(localize('sign'), end - start)
-	st = this.reportVariadicMin(this.reportVariadicMax(st, 1), this.reportListAttribute(localize('length'), list));
-	nd = this.reportVariadicMin(this.reportVariadicMax(nd, 1), this.reportListAttribute(localize('length'), list));
+	st = this.reportVariadicMin(this.reportVariadicMax(st, 1), list.length());
+	nd = this.reportVariadicMin(this.reportVariadicMax(nd, 1), list.length());
 	for (let i = st; i <= nd; i += sg) {
 		this.context.outerContext.variables.addVar(upvar);
     	this.context.outerContext.variables.setVar(upvar, this.reportListItem(i, list));
