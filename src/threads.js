@@ -3796,7 +3796,7 @@ Process.prototype.doForList = function (upvar, start, end, list, script) {
 	}
 	var vars = this.context.outerContext.variables,
         dta = this.context.accumulator;
-		up = 1
+		up = "up"
 		step = start < end ? 1 : -1
 		reach = 0
     if (dta === null) {
@@ -3804,18 +3804,18 @@ Process.prototype.doForList = function (upvar, start, end, list, script) {
         this.assertType(+end, 'number');
         dta = this.context.accumulator = {
             test : +start < +end ?
-                (() => +up > +end)
-                : (() => +up < +end),
+                (() => up > +end)
+                : (() => up < +end),
             step : +start < +end ? 1 : -1,
             parms : new List() // empty parameters, reusable to avoid GC
         };
-		up = Math.floor(+start)
+		vars.addVar(up);
+		vars.setVar(up, Math.floor(+start));
         vars.addVar(upvar);
         vars.setVar(upvar, this.reportListItem(Math.floor(+start), list));
     } else {
-		reach = up == end ? 0 : step
-		up += reach
-		vars.changeVar(upvar, this.reportListItem(+up, list));
+		vars.changeVar(up, dta.step);
+		vars.changeVar(upvar, this.reportListItem(dta.step, list));
     }
     if (dta.test()) {return; }
     this.pushContext('doYield');
