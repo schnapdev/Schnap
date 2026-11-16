@@ -12325,6 +12325,22 @@ WorldMorph.prototype.getGlobalPixelColor = function (point) {
     // and sample that one instead of the actual world canvas
     // this slows things down but keeps Chrome from crashing
     // in v119 in the Fall of 2023
+	// with @codingisfun2831t's hyper optimization
+	
+	if (this.enableHyperOps) {
+    	if (location instanceof List && !this.isCoordinate(location)) {
+    	    var thisObj = this.blockReceiver(),
+    	        world = thisObj.world(),
+        	    ctx = Morph.prototype.fullImage.call(world)
+            	          .getContext('2d');
+
+        	return location.map(each => {
+            	var data = ctx.getImageData(each.at(1), each.at(2), 1, 1)
+            	              .data;
+            	return new Color(data[0], data[1], data[2]);
+        	});
+    	}
+	}
     var dta = Morph.prototype.fullImage.call(this)
             .getContext('2d')
             .getImageData(point.x, point.y, 1, 1)
