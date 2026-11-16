@@ -3739,24 +3739,14 @@ Process.prototype.doForEach = function (upvar, list, script) {
 
 Process.prototype.doForIndex = function (upvar, list, script) {
 	// for each index of a list
-	this.assertType(list, 'list');
-    if (!script || length === 0) {
-        return null;
-    }
-	if (this.context.counter === null) {
-        this.context.counter = 1;
-    }
-	if (this.context.counter <= list.length()) {
-		this.context.outerContext.variables.addVar(upvar);
-    	this.context.outerContext.variables.setVar(upvar, this.context.counter);
-		this.context.counter += 1;
-    	this.pushContext('doYield');
-    	this.pushContext(script);
-	}
+	var acc = 1
+	this.doForEach("item", list, this.context.outerContext.variables.addVar(upvar);this.context.outerContext.variables.setVar(upvar, acc);this.pushContext('doYield');this.pushContext(script);acc += 1;);
 };
 
 Process.prototype.doForList = function (upvar, start, end, list, script) {
-	var length, st, nd, sg;
+	var length, st, nd, forvar;
+
+	forvar = 1
 
     this.assertType(list, 'list');
     length = list.length();
@@ -3768,19 +3758,8 @@ Process.prototype.doForList = function (upvar, start, end, list, script) {
     nd = end === '' ? length : Number(end);
     st = Math.min(Math.max(st, 1), length);
     nd = Math.min(Math.max(nd, 1), length);
-    sg = st <= nd ? 1 : -1;
 
-    if (this.context.counter === null) {
-        this.context.counter = st;
-    }
-
-    if ((sg === 1 && this.context.counter <= nd) || (sg === -1 && this.context.counter >= nd)) {
-        this.context.outerContext.variables.addVar(upvar);
-        this.context.outerContext.variables.setVar(upvar, list.at(this.context.counter));
-		this.context.counter += sg;
-        this.pushContext('doYield');
-        this.pushContext(script);
-    }
+    this.doFor("forvar", st, nd, this.context.outerContext.variables.addVar(upvar);this.context.outerContext.variables.setVar(upvar, this.reportListItem(forvar, list)this.pushContext('doYield');this.pushContext(script);forvar += 1;);
 }
 
 Process.prototype.doFor = function (upvar, start, end, script) {
