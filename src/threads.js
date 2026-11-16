@@ -3807,7 +3807,7 @@ Process.prototype.doForList = function (upvar, start, end, list, script) {
             parms : new List() // empty parameters, reusable to avoid GC
         };
         vars.addVar(upvar);
-        vars.setVar(upvar, Math.floor(+start));
+        vars.setVar(upvar, this.reportListItem(Math.floor(+start), list));
     } else {
         vars.changeVar(upvar, dta.step);
     }
