@@ -3814,11 +3814,11 @@ Process.prototype.doForList = function (upvar, start, end, list, script) {
 		vars.setVar(up, Math.floor(+start));
         vars.addVar(upvar);
         vars.setVar(upvar, this.reportListItem(Math.floor(+start), list));
-		dta.idx = 1
+		dta.idx = +start
     } else {
 		vars.changeVar(up, dta.idx);
 		vars.changeVar(upvar, this.reportListItem(dta.idx, list));
-		dta.idx += 1
+		dta.idx = dta.idx + dta.step
     }
     if (dta.test()) {return; }
     this.pushContext('doYield');
