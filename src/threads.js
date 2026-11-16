@@ -5441,7 +5441,7 @@ Process.prototype.reportPower = function (a, b) {
 };
 
 Process.prototype.reportRoot = function (a, b) {
-    return this.hyper(this.reportBasicPower, a, 1 / b);
+    return this.hyper(this.reportBasicPower, b, 1 / a);
 };
 
 Process.prototype.reportBasicPower = function (a, b) {
