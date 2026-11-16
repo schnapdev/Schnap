@@ -3741,14 +3741,13 @@ Process.prototype.doForIndex = function (upvar, list, script) {
 	// for each index of a list
 	var acc = 1
 		context = this.context.outerContext
-		selfvar = this
 	function functionSequentiate() {
 		context.variables.addVar(upvar);
 		context.variables.setVar(upvar, acc);
 		selfvar.pushContext('doYield');
 		selfvar.pushContext(script);
 	}
-	this.doForEach("item", list, (functionSequentiate(), acc += 1));
+	this.doForEach("item", list, (context.variables.addVar(upvar), context.variables.setVar(upvar, acc), this.pushContext('doYield'), this.pushContext(script), acc += 1));
 };
 
 Process.prototype.doForList = function (upvar, start, end, list, script) {
@@ -3756,13 +3755,7 @@ Process.prototype.doForList = function (upvar, start, end, list, script) {
 
 	forvar = 1
 	context = this.context.outerContext
-	selfvar = this
-	function functionSequentiated() {
-		context.variables.addVar(upvar);
-		context.variables.setVar(upvar, selfvar.reportListItem(forvar, list));
-		selfvar.pushContext('doYield');
-		selfvar.pushContext(script);
-	}
+	
     this.assertType(list, 'list');
     length = list.length();
     if (!script || length === 0) {
@@ -3774,7 +3767,7 @@ Process.prototype.doForList = function (upvar, start, end, list, script) {
     st = Math.min(Math.max(st, 1), length);
     nd = Math.min(Math.max(nd, 1), length);
 
-    this.doFor("forvar", st, nd, (functionSequentiated(), forvar += 1));
+    this.doFor("forvar", st, nd, (context.variables.addVar(upvar), context.variables.setVar(upvar, selfvar.reportListItem(forvar, list)), this.pushContext('doYield'), this.pushContext(script), forvar += 1));
 }
 
 Process.prototype.doFor = function (upvar, start, end, script) {
