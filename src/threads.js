@@ -3759,7 +3759,7 @@ Process.prototype.doForList = function (upvar, start, end, list, script) {
     st = Math.min(Math.max(st, 1), length);
     nd = Math.min(Math.max(nd, 1), length);
 
-    this.doFor("forvar", st, nd, this.context.outerContext.variables.addVar(upvar);this.context.outerContext.variables.setVar(upvar, this.reportListItem(forvar, list)this.pushContext('doYield');this.pushContext(script);forvar += 1;);
+    this.doFor("forvar", st, nd, this.context.outerContext.variables.addVar(upvar);this.context.outerContext.variables.setVar(upvar, this.reportListItem(forvar, list));this.pushContext('doYield');this.pushContext(script);forvar += 1;);
 }
 
 Process.prototype.doFor = function (upvar, start, end, script) {
