@@ -2514,7 +2514,7 @@ SpriteMorph.prototype.primitiveBlocks = function () {
 		doForList: {
             type: 'command',
             category: 'lists',
-            spec: 'for %upvar $arrowLeft %n to %n %l %cla',
+            spec: 'for %upvar $arrowLeft %n to %n in %l %cla',
             defaults: [localize('item'), 1, 3],
             code: 'forList'
         },
