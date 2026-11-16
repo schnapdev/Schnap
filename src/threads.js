@@ -1330,7 +1330,9 @@ Process.prototype.isAutoLambda = function (inputSlot) {
         'doIfElse',
         'doWarp',
         'doFor',
-        'doForEach'
+        'doForEach',
+		'doForIndex',
+		'doForList'
     ].includes(inputSlot.parent?.selector)) {
         // special cases when overloading those primitives
         // with custom block definitions
@@ -3734,6 +3736,73 @@ Process.prototype.doForEach = function (upvar, list, script) {
     this.context.outerContext.variables.setVar(upvar, next);
     this.pushContext();
 };
+
+Process.prototype.doForIndex = function (upvar, list, script) {
+	// for each index of a list
+    var next;
+	var indicator;
+	indicator = 0
+    if (this.context.accumulator === null) {
+        this.assertType(list, 'list');
+        this.context.accumulator = {
+            source : list,
+            remaining : list.length(),
+            idx : 0
+        };
+    }
+    if (this.context.accumulator.remaining === 0) {
+        return;
+    }
+    this.context.accumulator.remaining -= 1;
+    if (this.context.accumulator.source.isLinked) {
+		indicator += 1;
+        next = this.context.accumulator.source.at(1);
+        this.context.accumulator.source =
+            this.context.accumulator.source.cdr();
+    } else { // arrayed
+		indicator += 1;
+        this.context.accumulator.idx += 1;
+        next = this.context.accumulator.source.at(this.context.accumulator.idx);
+    }
+    this.pushContext('doYield');
+
+    // optimize running the body script for speed:
+    // don't reify the C-slot contents, see: isAutoLambda()
+    // and put the script directly on the stack.
+    // below is the alternative - more correct (scope) code,
+    // retained in case of issues with the optimized version
+    // -------------------
+    // this.pushContext();
+    // this.context.outerContext.variables.addVar(upvar);
+    // this.context.outerContext.variables.setVar(upvar, next);
+    // this.evaluate(script, new List(/*[next]*/), true);
+
+    if (script) {
+        this.pushContext(script.blockSequence());
+    }
+    this.context.outerContext.variables.addVar(upvar);
+    this.context.outerContext.variables.setVar(upvar, indicator);
+    this.pushContext();
+};
+
+Process.prototype.doForList = function (upvar, start, end, list, script) {
+	var st = start
+		nd = end
+		sg = this.reportMonadic(localize('sign'), end - start)
+	if (start == "") {
+		st = 1;
+	}
+	if (end == "") {
+		nd = this.reportListAttribute(localize('length'), list);
+	}
+	st = this.reportVariadicMin(this.reportVariadicMax(st, 1), this.reportListAttribute(localize('length'), list));
+	nd = this.reportVariadicMin(this.reportVariadicMax(nd, 1), this.reportListAttribute(localize('length'), list));
+	for (let i = st; i <= nd; i += sg) {
+		this.context.outerContext.variables.addVar(upvar);
+    	this.context.outerContext.variables.setVar(upvar, this.reportListItem(i, list));
+		this.doRun(script)
+	}
+}
 
 Process.prototype.doFor = function (upvar, start, end, script) {
     // perform a script for every integer step between start and stop,
