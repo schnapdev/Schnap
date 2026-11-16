@@ -3807,15 +3807,18 @@ Process.prototype.doForList = function (upvar, start, end, list, script) {
                 (() => vars.getVar(up) > +end)
                 : (() => vars.getVar(up) < +end),
             step : +start < +end ? 1 : -1,
-            parms : new List() // empty parameters, reusable to avoid GC
+            parms : new List(), // empty parameters, reusable to avoid GC
+			idx : 0
         };
 		vars.addVar(up);
 		vars.setVar(up, Math.floor(+start));
         vars.addVar(upvar);
         vars.setVar(upvar, this.reportListItem(Math.floor(+start), list));
+		dta.idx = 1
     } else {
-		vars.changeVar(up, dta.step);
-		vars.changeVar(upvar, this.reportListItem(dta.step, list));
+		vars.changeVar(up, dta.idx);
+		vars.changeVar(upvar, this.reportListItem(dta.idx, list));
+		dta.idx += 1
     }
     if (dta.test()) {return; }
     this.pushContext('doYield');
