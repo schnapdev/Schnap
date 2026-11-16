@@ -3804,8 +3804,8 @@ Process.prototype.doForList = function (upvar, start, end, list, script) {
         this.assertType(+end, 'number');
         dta = this.context.accumulator = {
             test : +start < +end ?
-                (() => up > +end)
-                : (() => up < +end),
+                (() => vars.getVar(up) > +end)
+                : (() => vars.getVar(up) < +end),
             step : +start < +end ? 1 : -1,
             parms : new List() // empty parameters, reusable to avoid GC
         };
