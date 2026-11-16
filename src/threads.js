@@ -3805,15 +3805,15 @@ Process.prototype.doForList = function (upvar, start, end, list, script) {
                 (() => +up > +end)
                 : (() => +up < +end),
             step : +start < +end ? 1 : -1,
-			reach: +up = +end ? 0 : this.step,
             parms : new List() // empty parameters, reusable to avoid GC
         };
 		up = Math.floor(+start)
         vars.addVar(upvar);
         vars.setVar(upvar, this.reportListItem(Math.floor(+start), list));
     } else {
-		up += dta.reach
-		if (dta.reach == 0) {return; }
+		reach = up == end ? 0 : dta.step,
+		up += reach
+		if (reach == 0) {return; }
         vars.changeVar(upvar, this.reportListItem(up, list));
     }
     if (dta.test()) {return; }
