@@ -3741,7 +3741,7 @@ Process.prototype.doForIndex = function (upvar, list, script) {
 	// for each index of a list
 	this.context.outerContext.variables.addVar(upvar);
     for (let i = 1; i <= list.length(); i++) {
-		this.context.outerContext.variables.setVar(upvar, i);
+		this.doSetVar(upvar, i)
 		if (script) {
         	this.pushContext(script.blockSequence());
     	}
@@ -3749,6 +3749,7 @@ Process.prototype.doForIndex = function (upvar, list, script) {
 };
 
 Process.prototype.doForList = function (upvar, start, end, list, script) {
+	this.assertType(list, 'list');
 	var st = start
 		nd = end
 		sg = 0
@@ -3761,9 +3762,10 @@ Process.prototype.doForList = function (upvar, start, end, list, script) {
 	sg = this.reportMonadic(localize('sign'), end - start)
 	st = this.reportVariadicMin(this.reportVariadicMax(st, 1), list.length());
 	nd = this.reportVariadicMin(this.reportVariadicMax(nd, 1), list.length());
+	arr = list.asArray();
 	for (let i = st; i <= nd; i += sg) {
 		this.context.outerContext.variables.addVar(upvar);
-    	this.context.outerContext.variables.setVar(upvar, this.reportListItem(i, list));
+    	this.doSetVar(upvar, arr[i]);
 		if (script) {
         	this.pushContext(script.blockSequence());
     	}
