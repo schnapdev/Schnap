@@ -3740,8 +3740,7 @@ Process.prototype.doForEach = function (upvar, list, script) {
 Process.prototype.doForIndex = function (upvar, list, script) {
 	// for each index of a list
     var next;
-	var indicator;
-	indicator = 0
+	var indicator = 0;
     if (this.context.accumulator === null) {
         this.assertType(list, 'list');
         this.context.accumulator = {
@@ -3754,13 +3753,12 @@ Process.prototype.doForIndex = function (upvar, list, script) {
         return;
     }
     this.context.accumulator.remaining -= 1;
+	indicator += 1;
     if (this.context.accumulator.source.isLinked) {
-		indicator += 1;
         next = this.context.accumulator.source.at(1);
         this.context.accumulator.source =
             this.context.accumulator.source.cdr();
     } else { // arrayed
-		indicator += 1;
         this.context.accumulator.idx += 1;
         next = this.context.accumulator.source.at(this.context.accumulator.idx);
     }
@@ -3788,19 +3786,22 @@ Process.prototype.doForIndex = function (upvar, list, script) {
 Process.prototype.doForList = function (upvar, start, end, list, script) {
 	var st = start
 		nd = end
-		sg = this.reportMonadic(localize('sign'), end - start)
+		sg = 0
 	if (start == "") {
 		st = 1;
 	}
 	if (end == "") {
 		nd = this.reportListAttribute(localize('length'), list);
 	}
+	sg = this.reportMonadic(localize('sign'), end - start)
 	st = this.reportVariadicMin(this.reportVariadicMax(st, 1), this.reportListAttribute(localize('length'), list));
 	nd = this.reportVariadicMin(this.reportVariadicMax(nd, 1), this.reportListAttribute(localize('length'), list));
 	for (let i = st; i <= nd; i += sg) {
 		this.context.outerContext.variables.addVar(upvar);
     	this.context.outerContext.variables.setVar(upvar, this.reportListItem(i, list));
-		this.doRun(script)
+		if (script) {
+        	this.pushContext(script.blockSequence());
+    	}
 	}
 }
 
