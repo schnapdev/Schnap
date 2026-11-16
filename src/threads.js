@@ -3811,8 +3811,8 @@ Process.prototype.doForList = function (upvar, start, end, list, script) {
         vars.addVar(upvar);
         vars.setVar(upvar, this.reportListItem(Math.floor(+start), list));
     } else {
-		up = dta.step
-        vars.changeVar(upvar, this.reportListItem(dta.step, list));
+		up += dta.step
+        vars.changeVar(upvar, this.reportListItem(up, list));
     }
     if (dta.test()) {return; }
     this.pushContext('doYield');
