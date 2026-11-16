@@ -3738,36 +3738,95 @@ Process.prototype.doForEach = function (upvar, list, script) {
 };
 
 Process.prototype.doForIndex = function (upvar, list, script) {
-	// for each index of a list
-	var acc = 1
-		context = this.context.outerContext
-	function functionSequentiate() {
-		context.variables.addVar(upvar);
-		context.variables.setVar(upvar, acc);
-		selfvar.pushContext('doYield');
-		selfvar.pushContext(script);
-	}
-	this.doForEach("item", list, (context.variables.addVar(upvar), context.variables.setVar(upvar, acc), this.pushContext('doYield'), this.pushContext(script), acc += 1));
+	// perform a script for each element of a list, assigning the
+    // current iteration's element to a variable with the name
+    // specified in the "upvar" parameter, so it can be referenced
+    // within the script.
+    // Distinguish between linked and arrayed lists.
+
+    var next;
+    if (this.context.accumulator === null) {
+        this.assertType(list, 'list');
+        this.context.accumulator = {
+            source : list,
+            remaining : list.length(),
+            idx : 0
+        };
+    }
+    if (this.context.accumulator.remaining === 0) {
+        return;
+    }
+    this.context.accumulator.remaining -= 1;
+    if (this.context.accumulator.source.isLinked) {
+		this.context.accumulator.idx += 1;
+        next = this.context.accumulator.idx;
+        this.context.accumulator.source =
+            this.context.accumulator.source.cdr();
+    } else { // arrayed
+        this.context.accumulator.idx += 1;
+        next = this.context.accumulator.idx;
+    }
+    this.pushContext('doYield');
+
+    // optimize running the body script for speed:
+    // don't reify the C-slot contents, see: isAutoLambda()
+    // and put the script directly on the stack.
+    // below is the alternative - more correct (scope) code,
+    // retained in case of issues with the optimized version
+    // -------------------
+    // this.pushContext();
+    // this.context.outerContext.variables.addVar(upvar);
+    // this.context.outerContext.variables.setVar(upvar, next);
+    // this.evaluate(script, new List(/*[next]*/), true);
+
+    if (script) {
+        this.pushContext(script.blockSequence());
+    }
+    this.context.outerContext.variables.addVar(upvar);
+    this.context.outerContext.variables.setVar(upvar, next);
+    this.pushContext();
 };
 
 Process.prototype.doForList = function (upvar, start, end, list, script) {
-	var length, st, nd, forvar;
-
-	forvar = 1
-	context = this.context.outerContext
-	
-    this.assertType(list, 'list');
-    length = list.length();
-    if (!script || length === 0) {
-        return null;
+	if (start == "") {
+		start = 1
+	}
+	if (end == "") {
+		end = list.length();
+	}
+	var vars = this.context.outerContext.variables,
+        dta = this.context.accumulator;
+    if (dta === null) {
+        this.assertType(+start, 'number');
+        this.assertType(+end, 'number');
+        dta = this.context.accumulator = {
+            test : +start < +end ?
+                (() => vars.getVar(upvar) > +end)
+                : (() => vars.getVar(upvar) < +end),
+            step : +start < +end ? 1 : -1,
+            parms : new List() // empty parameters, reusable to avoid GC
+        };
+        vars.addVar(upvar);
+        vars.setVar(upvar, Math.floor(+start));
+    } else {
+        vars.changeVar(upvar, dta.step);
     }
+    if (dta.test()) {return; }
+    this.pushContext('doYield');
 
-    st = start === '' ? 1 : Number(start);
-    nd = end === '' ? length : Number(end);
-    st = Math.min(Math.max(st, 1), length);
-    nd = Math.min(Math.max(nd, 1), length);
+    // optimize running the body script for speed:
+    // don't reify the C-slot contents, see: isAutoLambda()
+    // and put the script directly on the stack.
+    // below is the alternative - more correct (scope) code,
+    // retained in case of issues with the optimized version
+    // -------------------
+    // this.pushContext();
+    // this.evaluate(script, dta.parms, true);
 
-    this.doFor("forvar", st, nd, (context.variables.addVar(upvar), context.variables.setVar(upvar, selfvar.reportListItem(forvar, list)), this.pushContext('doYield'), this.pushContext(script), forvar += 1));
+    if (script) {
+        this.pushContext(script.blockSequence());
+    }
+    this.pushContext();
 }
 
 Process.prototype.doFor = function (upvar, start, end, script) {
