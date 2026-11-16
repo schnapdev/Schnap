@@ -3797,6 +3797,8 @@ Process.prototype.doForList = function (upvar, start, end, list, script) {
 	var vars = this.context.outerContext.variables,
         dta = this.context.accumulator;
 		up = 1
+		step = start < end ? 1 : -1
+		reach = 0
     if (dta === null) {
         this.assertType(+start, 'number');
         this.assertType(+end, 'number');
@@ -3811,11 +3813,9 @@ Process.prototype.doForList = function (upvar, start, end, list, script) {
         vars.addVar(upvar);
         vars.setVar(upvar, this.reportListItem(Math.floor(+start), list));
     } else {
-		step = start < end ? 1 : -1
 		reach = up == end ? 0 : step
 		up += reach
-		if (reach == 0) {return; }
-        vars.changeVar(upvar, this.reportListItem(up, list));
+		vars.changeVar(upvar, this.reportListItem(+up, list));
     }
     if (dta.test()) {return; }
     this.pushContext('doYield');
