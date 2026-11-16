@@ -3739,37 +3739,48 @@ Process.prototype.doForEach = function (upvar, list, script) {
 
 Process.prototype.doForIndex = function (upvar, list, script) {
 	// for each index of a list
-	this.context.outerContext.variables.addVar(upvar);
-    for (let i = 1; i <= list.length(); i++) {
-		this.doSetVar(upvar, i)
-		if (script) {
-        	this.pushContext(script.blockSequence());
-    	}
+	this.assertType(list, 'list');
+    if (!script || length === 0) {
+        return null;
+    }
+	if (this.context.counter === null) {
+        this.context.counter = 1;
+    }
+	if (this.context.counter <= list.length()) {
+		this.context.outerContext.variables.addVar(upvar);
+    	this.context.outerContext.variables.setVar(upvar, this.context.counter);
+    	this.pushContext('doYield');
+    	this.pushContext(script);
+		this.context.counter += 1;
 	}
 };
 
 Process.prototype.doForList = function (upvar, start, end, list, script) {
-	this.assertType(list, 'list');
-	var st = start
-		nd = end
-		sg = 0
-	if (start == "") {
-		st = 1;
-	}
-	if (end == "") {
-		nd = list.length();
-	}
-	sg = this.reportMonadic(localize('sign'), end - start)
-	st = this.reportVariadicMin(this.reportVariadicMax(st, 1), list.length());
-	nd = this.reportVariadicMin(this.reportVariadicMax(nd, 1), list.length());
-	arr = list.asArray();
-	for (let i = st; i <= nd; i += sg) {
-		this.context.outerContext.variables.addVar(upvar);
-    	this.doSetVar(upvar, arr[i]);
-		if (script) {
-        	this.pushContext(script.blockSequence());
-    	}
-	}
+	var length, st, nd, sg;
+
+    this.assertType(list, 'list');
+    length = list.length();
+    if (!script || length === 0) {
+        return null;
+    }
+
+    st = start === '' ? 1 : Number(start);
+    nd = end === '' ? length : Number(end);
+    st = Math.min(Math.max(st, 1), length);
+    nd = Math.min(Math.max(nd, 1), length);
+    sg = st <= nd ? 1 : -1;
+
+    if (this.context.counter === null) {
+        this.context.counter = st;
+    }
+
+    if ((sg === 1 && this.context.counter <= nd) || (sg === -1 && this.context.counter >= nd)) {
+        this.context.outerContext.variables.addVar(upvar);
+        this.context.outerContext.variables.setVar(upvar, list.at(this.context.counter));
+        this.pushContext('doYield');
+        this.pushContext(script);
+		this.context.counter += sg;
+    }
 }
 
 Process.prototype.doFor = function (upvar, start, end, script) {
