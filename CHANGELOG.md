@@ -1,5 +1,10 @@
 # Schnap! Changelog
 This is the changelog for Schnap!
+## Schnap! 1.2.1
+* Fixed the for each item () to () of block to report the item instead of its index
+## Schnap! 1.2.0
+* Made the for each # of block
+* Made the for each item () to () of block
 ## Schnap! 1.1.2
 * Changed the about dialog
 * Changed the "Snap! website" option to "Forum post about Schnap!"
