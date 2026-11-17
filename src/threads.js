@@ -3814,7 +3814,7 @@ Process.prototype.doForList = function (upvar, start, end, list, script) {
 		vars.setVar(up, Math.floor(+start));
         vars.addVar(upvar);
         vars.setVar(upvar, this.reportListItem(Math.floor(+start), list));
-		dta.idx = 1
+		dta.idx = Math.floor(+start) + 1
     } else {
 		vars.changeVar(up, dta.step);
 		vars.setVar(upvar, this.reportListItem(dta.idx, list));
