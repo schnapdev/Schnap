@@ -6096,7 +6096,9 @@ Process.prototype.reportBasicUnicodeAsLetter = function (num) {
 };
 
 Process.prototype.reportEquivalentScript = function (script1, script2, args) {
-    return (this.reportMap(script1, args) == this.reportMap(script2, args));
+	var map1 = this.reportMap(script1, args);
+		map2 = this.reportMap(script2, args);
+    return map1 == map2
 };
 
 Process.prototype.reportTextSplit = function (string, delimiter) {
