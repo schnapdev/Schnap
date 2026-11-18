@@ -2072,6 +2072,12 @@ SpriteMorph.prototype.primitiveBlocks = function () {
             spec: 'is %all== ?',
             code: 'same'
         },
+		reportEquivalentScript: {
+            type: 'predicate',
+            category: 'operators',
+            spec: 'is %repRing equivalent to %repRing for %exp ?',
+            code: 'equivalentScript'
+        },
 		reportIsValid: {
             type: 'predicate',
             category: 'operators',
@@ -4341,6 +4347,8 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push('-');
         blocks.push(block('reportUnicode'));
         blocks.push(block('reportUnicodeAsLetter'));
+		blocks.push('-');
+		blocks.push(block('reportEquivalentScript'));
         blocks.push('-');
         blocks.push(block('reportIsA'));
 		blocks.push(block('reportIsValid'));
@@ -12199,6 +12207,8 @@ StageMorph.prototype.blockTemplates = function (
         blocks.push('-');
         blocks.push(block('reportUnicode'));
         blocks.push(block('reportUnicodeAsLetter'));
+		blocks.push('-');
+		blocks.push(block('reportEquivalentScript'));
         blocks.push('-');
         blocks.push(block('reportIsA'));
 		blocks.push(block('reportIsValid'));
