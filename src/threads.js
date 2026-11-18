@@ -6095,6 +6095,10 @@ Process.prototype.reportBasicUnicodeAsLetter = function (num) {
     return String.fromCharCode(code);
 };
 
+Process.prototype.reportEquivalentScript = function (script1, script2, args) {
+    return (this.reportMap(script1, args) == this.reportMap(script2, args));
+};
+
 Process.prototype.reportTextSplit = function (string, delimiter) {
     if (this.inputOption(delimiter) === 'blocks') {
         if (isString(string) && '(;'.includes(string.trim()[0])) {
