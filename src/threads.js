@@ -6096,8 +6096,8 @@ Process.prototype.reportBasicUnicodeAsLetter = function (num) {
 };
 
 Process.prototype.reportEquivalentScript = function (script1, script2, list) {
-	var map1 = this.reportCDR(this.reportCDR(this.reportMap(script1, list)));
-		map2 = this.reportCDR(this.reportCDR(this.reportMap(script2, list)));
+	var map1 = this.reportMap(script1, list);
+		map2 = this.reportMap(script2, list);
 	return snapEquals(map1, map2)
 };
 
