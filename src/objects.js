@@ -4349,8 +4349,6 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push(block('reportUnicode'));
         blocks.push(block('reportUnicodeAsLetter'));
 		blocks.push('-');
-		blocks.push(block('reportEquivalentScript'));
-        blocks.push('-');
         blocks.push(block('reportIsA'));
 		blocks.push(block('reportIsValid'));
         blocks.push(block('reportVariadicIsIdentical'));
@@ -4427,6 +4425,7 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push(block('reportListIsEmpty'));
         blocks.push('-');
         blocks.push(block('reportMap'));
+		blocks.push(block('reportXmap'));
         blocks.push(block('reportKeep'));
         blocks.push(block('reportFindFirst'));
         blocks.push(block('reportCombine'));
