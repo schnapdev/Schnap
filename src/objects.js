@@ -2222,6 +2222,12 @@ SpriteMorph.prototype.primitiveBlocks = function () {
             spec: 'link %l',
             code: 'link'
         },
+		reportLinked: {
+            type: 'predicate',
+            category: 'lists',
+            spec: 'is %l linked?',
+            code: 'linked'
+        },
         reportListLength: { // deprecated as of v6.6
             dev: true,
             type: 'reporter',
@@ -4417,7 +4423,9 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push(block('reportCONS'));
         blocks.push(block('reportListItem'));
         blocks.push(block('reportCDR'));
+		blocks.push('-');
 		blocks.push(block('reportLink'));
+		blocks.push(block('reportLinked'));
         blocks.push('-');
         blocks.push(block('reportListAttribute'));
         blocks.push(block('reportListIndex'));
@@ -12269,6 +12277,9 @@ StageMorph.prototype.blockTemplates = function (
         blocks.push(block('reportCONS'));
         blocks.push(block('reportListItem'));
         blocks.push(block('reportCDR'));
+		blocks.push('-');
+		blocks.push(block('reportLink'));
+		blocks.push(block('reportLinked'));
         blocks.push('-');
         blocks.push(block('reportListAttribute'));
         blocks.push(block('reportListIndex'));
