@@ -3972,6 +3972,16 @@ Process.prototype.reportMap = function (reporter, list) {
     return this.evaluate(reporter, new List(parms));
 };
 
+Process.prototype.reportXmap = function (args, list) {
+	var vars = this.context.outerContext.variables,
+        upvar = list
+	    item = "item"
+    vars.addVar(item);
+	vars.setVar(item, "");
+	this.doForEach(item, args, upvar = this.reportMap(item, upvar));
+	return upvar;
+}
+
 Process.prototype.reportKeep = function (predicate, list) {
     // Filter - answer a new list containing the items of the list for which
     // the predicate evaluates TRUE.
