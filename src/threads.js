@@ -2524,6 +2524,10 @@ Process.prototype.reportLink = function (list) {
     return new List().cons(this.reportListItem(1, list), this.reportCDR(list));
 };
 
+Process.prototype.reportLinked = function (list) {
+	return list.isLinked;
+}
+
 Process.prototype.doAddToList = function (element, list) {
     this.assertType(list, 'list');
     if (list.type) {
