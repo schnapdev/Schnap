@@ -3978,7 +3978,7 @@ Process.prototype.reportXmap = function (args, list) {
 	    item = "item"
     vars.addVar(item);
 	vars.setVar(item, "");
-	this.doForEach(item, args, upvar = this.reportMap(item, upvar));
+	this.doForEach(item, args, (upvar = this.reportMap(vars.getVar(item), upvar)));
 	return upvar;
 }
 
