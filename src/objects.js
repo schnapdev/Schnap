@@ -2072,12 +2072,6 @@ SpriteMorph.prototype.primitiveBlocks = function () {
             spec: 'is %all== ?',
             code: 'same'
         },
-		reportEquivalentScript: {
-            type: 'predicate',
-            category: 'operators',
-            spec: 'is %repRing equivalent to %repRing for %exp ?',
-            code: 'equivalentScript'
-        },
 		reportIsValid: {
             type: 'predicate',
             category: 'operators',
@@ -2415,6 +2409,13 @@ SpriteMorph.prototype.primitiveBlocks = function () {
             category: 'lists',
             spec: '$blitz map %repRing over %l'
         },
+		/* reportXmap: { not in use, broken
+            type: 'reporter',
+            category: 'operators',
+			reports: 'list',
+            spec: 'xmap %mult%repRing over %l',
+            code: 'xmap'
+        }, */
         reportKeep: {
             type: 'reporter',
             reports: 'list',
@@ -4348,8 +4349,6 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push(block('reportUnicode'));
         blocks.push(block('reportUnicodeAsLetter'));
 		blocks.push('-');
-		blocks.push(block('reportEquivalentScript'));
-        blocks.push('-');
         blocks.push(block('reportIsA'));
 		blocks.push(block('reportIsValid'));
         blocks.push(block('reportVariadicIsIdentical'));
@@ -12208,8 +12207,6 @@ StageMorph.prototype.blockTemplates = function (
         blocks.push(block('reportUnicode'));
         blocks.push(block('reportUnicodeAsLetter'));
 		blocks.push('-');
-		blocks.push(block('reportEquivalentScript'));
-        blocks.push('-');
         blocks.push(block('reportIsA'));
 		blocks.push(block('reportIsValid'));
         blocks.push(block('reportVariadicIsIdentical'));
