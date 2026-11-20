@@ -2409,13 +2409,13 @@ SpriteMorph.prototype.primitiveBlocks = function () {
             category: 'lists',
             spec: '$blitz map %repRing over %l'
         },
-		reportXmap: {
+		/* reportXmap: { not in use, broken
             type: 'reporter',
             category: 'operators',
 			reports: 'list',
             spec: 'xmap %mult%repRing over %l',
             code: 'xmap'
-        },
+        }, */
         reportKeep: {
             type: 'reporter',
             reports: 'list',
@@ -4425,7 +4425,6 @@ SpriteMorph.prototype.blockTemplates = function (
         blocks.push(block('reportListIsEmpty'));
         blocks.push('-');
         blocks.push(block('reportMap'));
-		blocks.push(block('reportXmap'));
         blocks.push(block('reportKeep'));
         blocks.push(block('reportFindFirst'));
         blocks.push(block('reportCombine'));
@@ -12277,7 +12276,6 @@ StageMorph.prototype.blockTemplates = function (
         blocks.push(block('reportListIsEmpty'));
         blocks.push('-');
         blocks.push(block('reportMap'));
-		blocks.push(block('reportXmap'));
         blocks.push(block('reportKeep'));
         blocks.push(block('reportFindFirst'));
         blocks.push(block('reportCombine'));
