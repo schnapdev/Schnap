@@ -11950,7 +11950,9 @@ StageMorph.prototype.blockTemplates = function (
     if (category === 'motion') {
 
         blocks.push(block('reportDial'));
+		blocks.push('-');
 		blocks.push(block('reportDialAsNumber'));
+		blocks.push(block('reportAddToDial'));
 
     } else if (category === 'looks') {
 
@@ -12186,6 +12188,7 @@ StageMorph.prototype.blockTemplates = function (
         blocks.push(block('reportVariadicProduct'));
         blocks.push(block('reportQuotient'));
         blocks.push(block('reportPower'));
+		blocks.push(block('reportRoot'));
         blocks.push('-');
         blocks.push(block('reportModulus'));
         blocks.push(block('reportVariadicMin'));
