@@ -200,15 +200,30 @@
     }
   },
   {
-    "fileName": "Better blocks.xml",
-    "name": "Better blocks",
+    "fileName": "Cancelled Primitives And Other Useful Blocks blocks.xml",
+    "name": "Cancelled Primitives And Other Useful Blocks",
     "description": "Random blocks to make use of Schnap! better",
     "searchData": [
+	  "layer",
+	  "new color red _ green _ blue _ alpha _",
+	  "current millisecond",
+	  "is _ equivalent to _ for _ ?",
+	  "xmap _ over _",
+	  "xkeep _ from _",
+	  "xfirst _ in _",
+	  "input list _",
+	  "dot product _ _",
+	  "expand _ with _ to size _",
       "let _ _",
 	  "let _ _ reporting themselves",
 	  "insert into _ _"
     ],
     "categories": [
+	  "Looks",
+	  "Pen",
+	  "Sensing",
+	  "Operators",
+	  "Lists",
       "Other",
 	  "Control"
     ]
@@ -3390,6 +3405,20 @@
     ],
     "categories": [
       "sensing"
+    ]
+  },
+  {
+    "fileName": "Better blocks.xml",
+    "name": "(old) Better blocks",
+    "description": "Random blocks to make use of Schnap! better (replaced by CPAOUB)",
+    "searchData": [
+      "let _ _",
+	  "let _ _ reporting themselves",
+	  "insert into _ _"
+    ],
+    "categories": [
+      "Other",
+	  "Control"
     ]
   }
 ]
