@@ -12295,6 +12295,8 @@ StageMorph.prototype.blockTemplates = function (
         blocks.push(block('reportCombine'));
         blocks.push('-');
         blocks.push(block('doForEach'));
+		blocks.push(block('doForIndex'));
+		blocks.push(block('doForList'));
         blocks.push('-');
         blocks.push(block('doAddToList'));
         blocks.push(block('doDeleteFromList'));
