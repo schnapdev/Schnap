@@ -1343,6 +1343,19 @@
     ]
   },
   {
+    "fileName": "Equivalence.xml",
+    "name": "Equivalence",
+    "description": "Determine equivalence with more precision",
+    "searchData": [
+	  "is _ = _ ?",
+      "is _ literally _ ?"
+    ],
+    "categories": [
+	  "sensing",
+      "operators"
+    ]
+  },
+  {
     "fileName": "word-sentence.xml",
     "name": "Words, sentences",
     "description": "One of the big ideas in Logo that they left out of Scratch is thinking of text as structured into words and sentences, rather than just a string of characters.  This library brings back that idea.",
