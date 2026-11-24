@@ -251,6 +251,23 @@
     ]
   },
   {
+    "fileName": "processStuffLib.xml",
+    "name": "Process stuff",
+    "description": "Expand on processes",
+    "searchData": [
+	  "my _",
+	  "new inactive process _",
+	  "_ process _",
+	  "unpause all",
+	  "let _ _"
+    ],
+    "categories": [
+	  "Sensing",
+	  "Control",
+	  "Other"
+    ]
+  },
+  {
     "fileName": "shapes_module.xml",
     "name": "Shapes",
     "description": "Create, combine, transform and display geometric shapes for a functions-first approach to teaching programming. Inspired by Pyret's image library, see: https://pyret.org/docs/horizon/image.html - under development",
